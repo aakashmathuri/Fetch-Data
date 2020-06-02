@@ -4,11 +4,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-
-
-void main() => runApp(new MaterialApp(
-      home: new HomePage(),
-    ));
+void main() => runApp(
+      MaterialApp(
+        home: HomePage(),
+      ),
+    );
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,7 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   final String url = "https://swapi.dev/api/people";
   List data;
 
@@ -25,11 +24,10 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     this.getJsonData();
   }
+
   Future<String> getJsonData() async {
-    var response = await http.get(
-      Uri.encodeFull(url),
-      headers: {'Accept': 'application/json'}
-    );
+    var response = await http
+        .get(Uri.encodeFull(url), headers: {'Accept': 'application/json'});
     print(response.body);
 
     setState(() {
@@ -41,22 +39,22 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        title: new Text('Retrieve Json via HTTP Get'),
+        title: Text('Retrieve Json via HTTP Get'),
       ),
-      body: new ListView.builder(
+      body: ListView.builder(
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
-          return new Container(
-            child: new Center(
-              child: new Column(
+          return Container(
+            child: Center(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  new Card(
-                    child: new Container(
-                      child: new Text(data[index]['name']),
-                      padding: new EdgeInsets.all(20.0),
+                  Card(
+                    child: Container(
+                      child: Text(data[index]['name']),
+                      padding: EdgeInsets.all(20.0),
                     ),
                   ),
                 ],
